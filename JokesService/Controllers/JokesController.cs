@@ -2,6 +2,7 @@
 using JokesApi.Models;
 using JokesApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace JokesApi.Controllers
@@ -47,16 +48,17 @@ namespace JokesApi.Controllers
 
         [HttpGet("search")]
         [ProducesResponseType(typeof(GroupedJokes), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(GroupedJokes), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> SearchJokes([FromQuery] string? term, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> SearchJokes([FromQuery, RegularExpression(@"^\w+$", ErrorMessage = "Term must be a single word without spaces or special characters.")] string? term, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation($"Starting {nameof(SearchJokes)} request...");
 
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
-
-                var response = await _jokeService.SearchJokesAsync(term, cancellationToken);
+               
+                var response = await _jokeService.SearchJokesAsync(term?.Trim(), cancellationToken);
                 
                 return Ok(response);
             }

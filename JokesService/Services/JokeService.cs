@@ -84,10 +84,13 @@ namespace JokesApi.Services
                 return joke;
             }
 
-            //make sure special chars are ecaped
+            //make sure special chars are escaped
             var escapedTerm = Regex.Escape(term);
-            var pattern = $@"\b{escapedTerm}\b";
-            var res = Regex.Replace(joke, pattern, m => $"<{m.Value}>", RegexOptions.IgnoreCase);
+            // i was originally going go just emphasize the actual word (pattern var below), but i noticed that 
+            // the dad joke api will actually match the pattern within the words so i will do the same
+            //var pattern = $@"\b{escapedTerm}\b";
+            var res = Regex.Replace(joke, escapedTerm, $"<{term}>", RegexOptions.IgnoreCase);
+
 
             return res;
         }
