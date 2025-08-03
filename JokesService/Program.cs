@@ -23,11 +23,10 @@ builder.Services.AddDadJokeServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 //not needed for containerized deploy.  In this case digital ocean will handle the https redirect
 //app.UseHttpsRedirection();
