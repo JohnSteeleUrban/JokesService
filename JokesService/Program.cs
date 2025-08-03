@@ -29,7 +29,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//not needed for containerized deploy.  In this case digital ocean will handle the https redirect
+//app.UseHttpsRedirection();
 
 app.MapControllers();
 
