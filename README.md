@@ -23,6 +23,7 @@ The app is simple. I used a pretty standard pattern of separating each layer int
  - clint (external dependencies.) 
 
 I decided to just allow/define the 'term' as a single word or char.  The icanhazdadjoke api _does_ support multiple words and sends back results that appear to handle the muli word 'term' with 'or' functionality.  But, I decided to just simplify since this is a small app and I'm not exactly sure how/what their api is doing under the hood so it's best not to assume and just control for simplicity and to adhere to the assignment.  Otherwise, to add in multi word functionality would be pretty easy and we can go over a solultion.
+Paging - for the search endpoint, as the instructions say, I am only returning the first 30 (or however many if less) jokes. And since pages limit can be set to 30 jokes it's not necessary. But, I included it for fun or future use! If the SearchResultsLimit is more than 30.  We can easily pass down a variable from the controller to add that functionality but for now just bump up SearchResultsLimit to see it work.
 
 
 REST
